@@ -2,8 +2,7 @@ import { Card } from "./card.js";
 
 const callStarWars = url => {
   return new Promise(function(resolve, reject) {
-    const request = new Request(url);
-    fetch(request).then(response => {
+    fetch(url).then(response => {
       !response.ok ? reject(response.status) : resolve(response.json());
     });
   });

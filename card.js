@@ -27,6 +27,7 @@ export class Card {
     this.resetContainer();
 
     this.seeAllBtn.onclick = () => {
+      this.resetContainer();
       this.characters.forEach(character => {
         let li = document.createElement("li");
         li.classList.add("list-inline-item", "m-2");
@@ -44,8 +45,7 @@ export class Card {
 
   callDetails(url) {
     return new Promise(function(resolve, reject) {
-      const request = new Request(url);
-      fetch(request).then(response => {
+      fetch(url).then(response => {
         !response.ok ? reject(response.status) : resolve(response.json());
       });
     });
@@ -62,17 +62,17 @@ export class Card {
         ])
           .then(data => {
             this.h2.textContent = character.name;
-            this.box.innerHTML = `<p class="col-3">Birth year: ${
-              character.birth_year
-            }</p>
-          <p class="col-3">Mass: ${character.mass}</p>
-          <p class="col-3">Height: ${character.height}</p>
-          <p class="col-3">Eye color: ${character.eye_color}</p>
-          <p class="col-3">Skin color: ${character.skin_color}</p>
-          <p class="col-3">Hair color: ${character.hair_color}</p>
-          <p class="col-3">Gender: ${character.gender}</p>
-          <p class="col-3">Species: ${data[0].name} </p>
-          <p class="col-3">Homeworld: ${data[1].name} </p>
+            this.box.innerHTML = `<h5 class="col-12 mb-4">Homeworld: ${
+              data[1].name
+            } </h5>
+             <p class="col-3">Birth year: ${character.birth_year}</p> 
+             <p class="col-3">Mass: ${character.mass}</p>
+             <p class="col-3">Height: ${character.height}</p>
+             <p class="col-3">Eye color: ${character.eye_color}</p>
+             <p class="col-3">Skin color: ${character.skin_color}</p>
+             <p class="col-3">Hair color: ${character.hair_color}</p>
+             <p class="col-3">Gender: ${character.gender}</p>
+             <p class="col-3">Species: ${data[0].name} </p>   
           `;
           })
           .catch(error => {
@@ -86,6 +86,7 @@ export class Card {
   displayList() {
     this.input.onkeyup = e => {
       this.deleteAll();
+      this.resetContainer();
       if (e.target.value.length > 0) {
         let filtered = this.characters.filter(character => {
           let name = character.name.toLowerCase();
