@@ -1,5 +1,9 @@
 import { Card } from "./card.js";
 
+document.getElementById(
+  "h2"
+).innerHTML = `<i class="fas fa-spinner rotate"></i><br>`;
+
 const callStarWars = url => {
   return new Promise(function(resolve, reject) {
     fetch(url).then(response => {

@@ -23,9 +23,7 @@ export class Card {
   }
 
   displayAll() {
-    this.deleteAll();
     this.resetContainer();
-
     this.seeAllBtn.onclick = () => {
       this.resetContainer();
       this.characters.forEach(character => {
@@ -53,7 +51,6 @@ export class Card {
 
   displayCharacter(li) {
     this.resetContainer();
-
     this.characters.forEach(character => {
       if (character.name === li.innerHTML) {
         let data = Promise.all([
